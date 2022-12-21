@@ -1,6 +1,7 @@
 import importlib.util
 import os
 import re
+import sys
 
 from .i18n import load_translations
 from .logger import logger
