@@ -18,6 +18,7 @@ def import_module(name, path):
 
     spec = importlib.util.spec_from_file_location(name, os.path.abspath(path))
     module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
     spec.loader.exec_module(module)
 
     return module
@@ -33,7 +34,8 @@ def load_plugins_from_file(path, verbose=False):
     :returns: loaded module or None if no plugin found
     """
 
-    mod = import_module(path, path)
+    name = path.split(".py")[0].replace("/", ".")
+    mod = import_module(name, path)
 
     plugins = []
 
